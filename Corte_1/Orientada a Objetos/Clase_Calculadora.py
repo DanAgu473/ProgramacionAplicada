@@ -26,3 +26,19 @@ class factorial:
             return 1
         else:
             return a*self.fact(a-1)
+        
+class AreaC:
+    def area_cuadrado(self,lado):
+        return lado*lado
+    
+class AreaR:
+    def area_rectangulo(self,base,altura):
+        return base*altura
+    
+class AreaT:
+    def area_triangulo(self,base,altura):
+        return (base*altura)/2
+
+class AreaCir:
+    def area_circulo(self,radio):
+        return 3.1416*radio*radio
