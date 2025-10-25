@@ -1,25 +1,33 @@
 class Calculadora:
+    # inicializa el valor
     def __init__(self, val=0):
         self.val = val
 
+    # metodo suma
     def sum(self, a, b):
+
+        # verifica que los parámetros sean números
+        
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             return "Error: Solo se permiten números"
         self.val = a + b
         return self.val
 
+    # metodo resta
     def rest(self, a, b):
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             return "Error: Solo se permiten números"
         self.val = a - b
         return self.val
     
+    # metodo multiplicacion
     def mult(self, a, b):
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             return "Error: Solo se permiten números"
         self.val = a * b
         return self.val
     
+    # metodo division
     def divi(self, a, b):
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             return "Error: Solo se permiten números"
@@ -28,12 +36,14 @@ class Calculadora:
         self.val = a / b
         return self.val
     
+    # metodo cuadrado
     def cuadrado(self, a):
         if not isinstance(a, (int, float)):
             return "Error: Solo se permiten números"
         self.val = a * a
         return self.val
     
+    # metodo potencia
     def potencia(self, a, b):
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             return "Error: Solo se permiten números"
@@ -42,6 +52,7 @@ class Calculadora:
         self.val = a ** b
         return self.val
 
+    # metodo raiz cuadrada
     def raiz_cuadrada(self, a):
         if not isinstance(a, (int, float)):
             return "Error: Solo se permiten números"
@@ -49,7 +60,8 @@ class Calculadora:
             return "Error: Raíz cuadrada de número negativo"
         self.val = a ** 0.5
         return self.val
-     
+    
+    # metodo factorial 
     def fact(self, a):
         if not isinstance(a, int):
             return "Error: Solo se permiten números enteros"
@@ -64,13 +76,16 @@ class Calculadora:
 
 class Calculadora_de_Areas(Calculadora):
 
+    #inicializaR el valor de pi
     def __init__(self):
         super().__init__()
         self.pi = 3.141592653589793
 
+    # retorna el valor almacenado
     def getVal(self):
         return self.val * self.val
 
+    # area del cuadrado
     def area_cuadrado(self, lado):
         if not isinstance(lado, (int, float)):
             return "Error: Solo se permiten números"
@@ -79,6 +94,7 @@ class Calculadora_de_Areas(Calculadora):
         self.val = lado * lado
         return self.val
     
+    # area del rectangulo
     def area_rectangulo(self, base, altura):
         if not (isinstance(base, (int, float)) and isinstance(altura, (int, float))):
             return "Error: Solo se permiten números"
@@ -87,6 +103,7 @@ class Calculadora_de_Areas(Calculadora):
         self.val = base * altura
         return self.val
     
+    # area del triangulo
     def area_triangulo(self, base, altura):
         if not (isinstance(base, (int, float)) and isinstance(altura, (int, float))):
             return "Error: Solo se permiten números"
@@ -95,6 +112,7 @@ class Calculadora_de_Areas(Calculadora):
         self.val = (base * altura) / 2
         return self.val
 
+    # area del circulo
     def area_circulo(self, radio):
         if not isinstance(radio, (int, float)):
             return "Error: Solo se permiten números"
@@ -123,13 +141,18 @@ class Menu:
 
 
 def mainCalc():
+    # muestra el menú de opciones
     Menu.Interfaz()
+
+    # crea una instancia de Calculadora y Calculadora_de_Areas
     calc = Calculadora()
     area = Calculadora_de_Areas()
 
     while True:
         try:
             switcher = int(input("Ingrese la opción deseada: \n"))
+        
+        # captura el error si el valor ingresado no es un entero
         except ValueError:
             print("Opción no válida\n")
             continue
@@ -216,6 +239,6 @@ def mainCalc():
         else:
             print("Opción no válida")
 
-
+# punto de entrada del programa
 if __name__ == "__main__":
     mainCalc()
