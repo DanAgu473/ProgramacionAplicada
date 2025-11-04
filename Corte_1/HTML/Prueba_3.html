@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visualizador de Códigos Python (Estilo VS Code)</title>
+  <title>Visualizador de Códigos Python</title>
   <!-- Tema de colores tipo Visual Studio Code -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -334,16 +334,13 @@ while True:
     };
 
     function mostrarCodigo() {
-    const sel = document.getElementById("selector").value;
-    const pre = document.getElementById("codigo");
-    pre.textContent = codigos[sel];
+      const sel = document.getElementById("selector").value;
+      const pre = document.getElementById("codigo");
+      pre.textContent = codigos[sel];
+      hljs.highlightAll(); 
+    }
 
-    hljs.highlightElement(pre);
-  }
-
-  window.addEventListener("load", () => {
     mostrarCodigo();
-    });
   </script>
 
 </body>
