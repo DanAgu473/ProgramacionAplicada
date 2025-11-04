@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Códigos Python</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Consolas", monospace;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background: #202020;
+      color: white;
+    }
+    header {
+      background: #333;
+      padding: 10px;
+      text-align: center;
+      font-size: 1.3rem;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+    .left, .right {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+    pre {
+      flex: 1;
+      overflow-y: auto;
+      background: #1e1e1e;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    select {
+      padding: 10px;
+      font-size: 1rem;
+      background: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    select:hover {
+      background: #0097a7;
+    }
+    button, input {
+      margin: 5px;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      background: #00bcd4;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0097a7;
+    }
+    .panel {
+      background: #111;
+      flex: 1;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>🐍 Visualizador y simulador de scripts Python</header>
+  <main>
+    <div class="left">
+      <select id="scriptSelect" onchange="changeScript()">
+        <option value="calculadora">Calculadora.py</option>
+        <option value="primos">numeros_primos.py</option>
+        <option value="seno">Operacion_seno.py</option>
+        <option value="pares">pares_e_impares.py</option>
+      </select>
+      <pre><code id="codeDisplay" class="language-python"></code></pre>
+    </div>
+
+```
+<div class="right">
+  <div id="simulation" class="panel"></div>
+</div>
+```
+
+  </main>
+
+  <script>
+    const scripts = {
+      calculadora: `class Calculadora:
+    # inicializa el valor
+    def __init__(self, val=0):
+        self.val = val
+    def sum(self, a, b):
+        if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
+            return "Error: Solo se permiten números"
+        self.val = a + b
+        return self.val
+# ... resto del código ...`,
+      primos: `while True:
+    num = int(input("Ingrese un número: "))
+    for n in range(2, num):
+        if num % n == 0:
+            print("No es primo")
+            break
+    else:
+        print("Es primo")
+    if int(input("¿Desea probar otro? (1=Sí, otro=No): ")) != 1:
+        break`,
+      seno: `import math
+
+while True:
+    grados = float(input("Ingrese grados: "))
+    rad = grados/180*math.pi
+    print("El seno es:", math.sin(rad))
+    if int(input("¿Desea repetir? (1=Sí, otro=No): ")) != 1:
+        break`,
+      pares: `while True:
+    num = int(input("Ingrese un número: "))
+    if num % 2 == 0:
+        print("Es par")
+    else:
+        print("Es impar")
+    if int(input("¿Desea repetir? (1=Sí, otro=No): ")) != 1:
+        break`
+    };
+
+    function changeScript() {
+      const type = document.getElementById("scriptSelect").value;
+      document.getElementById("codeDisplay").textContent = scripts[type];
+      hljs.highlightAll();
+      loadSimulator(type);
+    }
+
+    function loadSimulator(type) {
+      const sim = document.getElementById("simulation");
+      sim.innerHTML = "";
+
+      if (type === "calculadora") {
+        sim.innerHTML = `
+          <h3>🧮 Calculadora</h3>
+          <input id="a" type="number" placeholder="Número A">
+          <input id="b" type="number" placeholder="Número B">
+          <button onclick="calc('sum')">Sumar</button>
+          <button onclick="calc('rest')">Restar</button>
+          <button onclick="calc('mult')">Multiplicar</button>
+          <button onclick="calc('divi')">Dividir</button>
+          <button onclick="calc('cuadrado')">Cuadrado</button>
+          <button onclick="calc('potencia')">Potencia</button>
+          <button onclick="calc('raiz_cuadrada')">Raíz cuadrada</button>
+          <button onclick="calc('fact')">Factorial</button>
+          <button onclick="area('cuadrado')">Área Cuadrado</button>
+          <button onclick="area('rectangulo')">Área Rectángulo</button>
+          <button onclick="area('triangulo')">Área Triángulo</button>
+          <button onclick="area('circulo')">Área Círculo</button>
+          <p id="calcResult"></p>`;
+      } else if (type === "primos") {
+        sim.innerHTML = `
+          <h3>🔢 Verificador de números primos</h3>
+          <input id="numPrimo" type="number" placeholder="Número">
+          <button onclick="verificarPrimo()">Verificar</button>
+          <p id="primoRes"></p>`;
+      } else if (type === "seno") {
+        sim.innerHTML = `
+          <h3>📐 Cálculo de seno</h3>
+          <input id="grados" type="number" placeholder="Grados">
+          <button onclick="calcSeno()">Calcular</button>
+          <p id="senoRes"></p>`;
+      } else if (type === "pares") {
+        sim.innerHTML = `
+          <h3>⚖️ Par o impar</h3>
+          <input id="numPar" type="number" placeholder="Número">
+          <button onclick="verificarPar()">Verificar</button>
+          <p id="parRes"></p>`;
+      }
+    }
+
+    // Funciones comunes
+    function calc(op) {
+      const a = parseFloat(document.getElementById("a").value);
+      const b = parseFloat(document.getElementById("b")?.value || 0);
+      let res = "";
+
+      if (isNaN(a)) {
+        document.getElementById("calcResult").textContent = "⚠️ Ingrese un número válido en A";
+        return;
+      }
+
+      switch (op) {
+        case "sum": res = a + b; break;
+        case "rest": res = a - b; break;
+        case "mult": res = a * b; break;
+        case "divi": res = b === 0 ? "Error: División por cero" : a / b; break;
+        case "cuadrado": res = a * a; break;
+        case "potencia": res = Math.pow(a, b); break;
+        case "raiz_cuadrada": res = a < 0 ? "Error: Raíz cuadrada de negativo" : Math.sqrt(a); break;
+        case "fact": res = factorial(Math.floor(a)); break;
+      }
+      document.getElementById("calcResult").textContent = "Resultado: " + res;
+    }
+
+    function factorial(n) {
+      if (n < 0) return "Error: Factorial de número negativo";
+      if (n === 0 || n === 1) return 1;
+      return n * factorial(n - 1);
+    }
+
+    function area(tipo) {
+      const a = parseFloat(document.getElementById("a").value);
+      const b = parseFloat(document.getElementById("b")?.value || 0);
+      let res = "";
+      const pi = Math.PI;
+
+      switch (tipo) {
+        case "cuadrado": res = a * a; break;
+        case "rectangulo": res = a * b; break;
+        case "triangulo": res = (a * b) / 2; break;
+        case "circulo": res = pi * a * a; break;
+      }
+      document.getElementById("calcResult").textContent = "Área: " + res;
+    }
+
+    function verificarPrimo() {
+      const num = parseInt(document.getElementById("numPrimo").value);
+      if (num <= 1) {
+        document.getElementById("primoRes").textContent = "No es primo";
+        return;
+      }
+      for (let n = 2; n < num; n++) {
+        if (num % n === 0) {
+          document.getElementById("primoRes").textContent = num + " no es primo (divisible por " + n + ")";
+          return;
+        }
+      }
+      document.getElementById("primoRes").textContent = num + " es primo";
+    }
+
+    function calcSeno() {
+      const grados = parseFloat(document.getElementById("grados").value);
+      const rad = grados * Math.PI / 180;
+      const seno = Math.sin(rad);
+      document.getElementById("senoRes").textContent = `El seno de ${grados}° es ${seno.toFixed(4)}`;
+    }
+
+    function verificarPar() {
+      const num = parseInt(document.getElementById("numPar").value);
+      const res = num % 2 === 0 ? "es par" : "es impar";
+      document.getElementById("parRes").textContent = `${num} ${res}`;
+    }
+
+    // Inicializa
+    changeScript();
+  </script>
+
+</body>
+</html>
