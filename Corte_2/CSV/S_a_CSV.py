@@ -2,30 +2,24 @@ import serial
 import time
 import re
 
-# 📌 Configuración del puerto y archivo
-puerto = 'COM5'       # Cambia esto según tu ESP32
+puerto = 'COM5'      
 baudrate = 115200
 archivo = 'lecturas.csv'
 
-# 🕓 Conexión con el ESP32
+# Conexión con el ESP32 via puerto serial
 ser = serial.Serial(puerto, baudrate, timeout=1)
 time.sleep(3)  # Espera que termine el bootloader del ESP32
 
-# 🧹 Limpia el buffer del arranque
 ser.reset_input_buffer()
-
-# ✍️ Encabezados del CSV
+# encabezado del CSV
 encabezado = "Tiempo(s),Lectura_ADC,Voltaje(V)"
-
-# 🧩 Patrón para aceptar solo líneas tipo CSV
+# Expresión regular para validar líneas CSV
 patron_csv = re.compile(r'^-?\d+(\.\d+)?,\s*\d+,\s*\d+(\.\d+)?$', re.IGNORECASE)
 
-# 📂 ABRIR EL ARCHIVO EN MODO *WRITE* PARA REESCRIBIR DESDE CERO
 with open(archivo, 'w', encoding='utf-8') as f:
     # Escribir encabezado siempre
     f.write(encabezado + '\n')
 
-    print("📡 Grabando datos del ESP32 en", archivo)
     print("Presiona Ctrl+C para detener...")
 
     try:
@@ -38,9 +32,7 @@ with open(archivo, 'w', encoding='utf-8') as f:
             if patron_csv.match(linea):
                 print(linea)
                 f.write(linea + '\n')
-
     except KeyboardInterrupt:
-        print("\n✅ Lectura detenida por el usuario.")
+        print("\n Lectura completada; creado el archivo lecturas.csv.")
     finally:
         ser.close()
-        print(f"📁 Datos guardados correctamente en '{archivo}'.")
