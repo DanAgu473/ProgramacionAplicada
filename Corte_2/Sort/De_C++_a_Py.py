@@ -8,7 +8,7 @@ def pedir_entero_positivo(mensaje):
             valor = int(valor)
             if valor > 0:
                 return valor
-        print("Entrada inválida. Debe ser un número entero mayor que 0.")
+        print("1Entrada inválida. Debe ser un número entero mayor que 0.")
 
 
 def pedir_entero(mensaje):
@@ -140,9 +140,9 @@ def selection_sort(arr):
 def main():
     while True:
         print("""
-========================
+_____________________________
     MENÚ DE ORDENAMIENTO
-========================
+_____________________________
 1. Bubble Sort
 2. Insertion Sort
 3. Merge Sort
