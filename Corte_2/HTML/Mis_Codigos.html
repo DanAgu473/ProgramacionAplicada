@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Visualizador de Códigos Python</title>
+
   <!-- Tema de colores tipo Visual Studio Code -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
   <style>
     body {
       background-color: #1e1e1e;
@@ -16,54 +17,165 @@
       margin: 0;
       padding: 0;
     }
-    h1 {
+
+    header {
       text-align: center;
-      background: #007acc;
+      background: #424a50;
       color: white;
-      padding: 10px;
+      padding: 15px;
     }
+
+    header img {
+      width: 80px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    h1 {
+      display: inline-block;
+      font-size: 1.8rem;
+    }
+
+    main {
+      padding: 20px;
+    }
+
     select {
       display: block;
       margin: 15px auto;
-      padding: 5px;
+      padding: 8px;
       font-size: 1rem;
-      background: #333;
+      background: #554f4f;
       color: white;
       border: 1px solid #555;
       border-radius: 4px;
     }
+
     pre {
-      width: 90%;
-      margin: 0 auto 20px auto;
+      width: 80%;
+      margin: 0 auto 25px auto;
       background: #1e1e1e;
       border: 1px solid #333;
       border-radius: 5px;
       padding: 15px;
       overflow-x: auto;
+      box-shadow: 0 0 10px #00000055;
+    }
+
+    section {
+      width: 80%;
+      margin: 30px auto;
+      background: #252526;
+      border: 1px solid #444;
+      border-radius: 6px;
+      padding: 15px;
+      box-shadow: 0 0 10px #00000055;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #007acc;
+    }
+
+    .img-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .img-container img {
+      width: 250px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00000088;
+    }
+
+    footer {
+      text-align: center;
+      background: #007acc;
+      padding: 10px;
+      margin-top: 30px;
     }
   </style>
 </head>
-<body>
-  <h1>Mis programas Python </h1>
-  <select id="selector" onchange="mostrarCodigo()">
-    <option value="calculadora">Calculadora.py</option>
-    <option value="primos">numeros_primos.py</option>
-    <option value="seno">Operacion_seno.py</option>
-    <option value="pares">pares_e_impares.py</option>
-  </select>
 
-  <pre><code id="codigo" class="language-python"></code></pre>
+<body>
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Logo Python">
+    <h1>Mis programas Python</h1>
+  </header>
+
+  <main>
+
+    <h2 style="text-align:center;">Selecciona un programa:</h2>
+    <select id="selector" onchange="mostrarCodigo()">
+      <option value="calculadora">Calculadora.py</option>
+      <option value="primos">numeros_primos.py</option>
+      <option value="seno">Operacion_seno.py</option>
+      <option value="pares">pares_e_impares.py</option>
+    </select>
+
+    <pre><code id="codigo" class="language-python"></code></pre>
+
+    <section>
+      <h2> Descripción general</h2>
+      <p>
+        Esta página muestra varios programas básicos en Python, útiles para aprender conceptos de programación aplicada,
+        como bucles, condicionales, recursividad y uso de librerías matemáticas.
+      </p>
+      <p>
+        Puedes seleccionar un archivo en el menú superior para visualizar su código con resaltado de sintaxis.
+      </p>
+    </section>
+
+    <section>
+      <h2> Funciones de la Calculadora</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Función</th>
+            <th>Descripción</th>
+            <th>Ejemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>sum(a, b)</td><td>Suma dos números</td><td>sum(5, 3) → 8</td></tr>
+          <tr><td>rest(a, b)</td><td>Resta dos números</td><td>rest(10, 4) → 6</td></tr>
+          <tr><td>cuadrado(a)</td><td>Calcula el cuadrado de un número</td><td>cuadrado(5) → 25</td></tr>
+          <tr><td>raiz_cuadrada(a)</td><td>Obtiene la raíz cuadrada</td><td>raiz_cuadrada(9) → 3</td></tr>
+          <tr><td>area_circulo(r)</td><td>Área del círculo con radio r</td><td>area_circulo(3) → 28.27</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2> Tema: Programación Aplicada</h2>
+      <p>
+        La programación aplicada combina teoría y práctica. Con ejercicios como los mostrados,
+        puedes desarrollar habilidades de pensamiento lógico y resolución de problemas.
+      </p>
+      <p>
+        Estos programas ejemplifican cómo aplicar estructuras básicas de Python para crear herramientas funcionales y reutilizables.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Desarrollado por [Tu Nombre] • Tema: Programación Aplicada</p>
+  </footer>
 
   <script>
     const codigos = {
       calculadora: `class Calculadora:
-    # inicializa el valor
-class Calculadora:
-    # inicializa el valor
-    def __init__(self, val=0):
-        self.val = val
-
-    # metodo suma
     def sum(self, a, b):
 
         # verifica que los parámetros sean números
@@ -101,208 +213,7 @@ class Calculadora:
         if not isinstance(a, (int, float)):
             return "Error: Solo se permiten números"
         self.val = a * a
-        return self.val
-    
-    # metodo potencia
-    def potencia(self, a, b):
-        if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
-            return "Error: Solo se permiten números"
-        if b == 0:
-            return 1
-        self.val = a ** b
-        return self.val
-
-    # metodo raiz cuadrada
-    def raiz_cuadrada(self, a):
-        if not isinstance(a, (int, float)):
-            return "Error: Solo se permiten números"
-        if a < 0:
-            return "Error: Raíz cuadrada de número negativo"
-        self.val = a ** 0.5
-        return self.val
-    
-    # metodo factorial 
-    def fact(self, a):
-        if not isinstance(a, int):
-            return "Error: Solo se permiten números enteros"
-        if a < 0:
-            return "Error: Factorial de número negativo"
-        if a == 0 or a == 1:
-            return 1
-        else:
-            self.val = a * self.fact(a - 1)
-            return self.val
-        
-
-class Calculadora_de_Areas(Calculadora):
-
-    #inicializaR el valor de pi
-    def __init__(self):
-        super().__init__()
-        self.pi = 3.141592653589793
-
-    # retorna el valor almacenado
-    def getVal(self):
-        return self.val * self.val
-
-    # area del cuadrado
-    def area_cuadrado(self, lado):
-        if not isinstance(lado, (int, float)):
-            return "Error: Solo se permiten números"
-        if lado <= 0:
-            return "Error: El lado no puede ser negativo ó cero"
-        self.val = lado * lado
-        return self.val
-    
-    # area del rectangulo
-    def area_rectangulo(self, base, altura):
-        if not (isinstance(base, (int, float)) and isinstance(altura, (int, float))):
-            return "Error: Solo se permiten números"
-        if base <= 0 or altura <= 0:
-            return "Error: La base y la altura no pueden ser negativos ó cero"
-        self.val = base * altura
-        return self.val
-    
-    # area del triangulo
-    def area_triangulo(self, base, altura):
-        if not (isinstance(base, (int, float)) and isinstance(altura, (int, float))):
-            return "Error: Solo se permiten números"
-        if base <= 0 or altura <= 0:
-            return "Error: La base y la altura no pueden ser negativos ó cero"
-        self.val = (base * altura) / 2
-        return self.val
-
-    # area del circulo
-    def area_circulo(self, radio):
-        if not isinstance(radio, (int, float)):
-            return "Error: Solo se permiten números"
-        if radio <= 0:
-            return "Error: El radio no puede ser negativo ó cero"
-        self.val = self.pi * radio * radio
-        return self.val
-
-
-class Menu:
-
-    @staticmethod
-    def Interfaz():
-        print("Seleccione la operación a realizar:")
-        print("0.Cerrar calculadora")
-        print("1.Sumar")
-        print("2.Restar")
-        print("3.Cuadrado")
-        print("4.Potencia")
-        print("5.Raíz Cuadrada")
-        print("6.Factorial")
-        print("7.Area del Cuadrado")
-        print("8.Area del Rectángulo")
-        print("9.Area del Triángulo Rectangulo")
-        print("10.Area del Círculo")
-
-
-def mainCalc():
-    # muestra el menú de opciones
-    Menu.Interfaz()
-
-    # crea una instancia de Calculadora y Calculadora_de_Areas
-    calc = Calculadora()
-    area = Calculadora_de_Areas()
-
-    while True:
-        try:
-            switcher = int(input("Ingrese la opción deseada: \n"))
-        
-        # captura el error si el valor ingresado no es un entero
-        except ValueError:
-            print("Opción no válida\n")
-            continue
-
-        if switcher == 0:
-            print("Cerrando calculadora...")
-            break
-
-        elif switcher == 1:
-            try:
-                a = float(input("Ingrese el primer número: \n"))
-                b = float(input("Ingrese el segundo número: \n"))
-                print("El resultado de la suma es: ", calc.sum(a, b))
-            except ValueError:
-                print("Error: Debe ingresar solo números.\n")
-
-        elif switcher == 2:
-            try:
-                a = float(input("Ingrese el primer número: \n"))
-                b = float(input("Ingrese el segundo número: \n"))
-                print("El resultado de la resta es: ", calc.rest(a, b))
-            except ValueError:
-                print("Error: Debe ingresar solo números.\n")
-
-        elif switcher == 3:
-            try:
-                a = float(input("Ingrese el número a elevar al cuadrado: \n"))
-                print("El resultado del cuadrado es: ", calc.cuadrado(a))
-            except ValueError:
-                print("Error: Debe ingresar solo números.\n")
-
-        elif switcher == 4:
-            try:
-                a = float(input("Ingrese la base: \n"))
-                b = float(input("Ingrese el exponente: \n"))
-                print("El resultado de la potencia es: ", calc.potencia(a, b))
-            except ValueError:
-                print("Error: Debe ingresar solo números.\n")
-
-        elif switcher == 5:
-            try:
-                a = float(input("Ingrese el número para calcular su raíz cuadrada: \n"))
-                print("El resultado de la raíz cuadrada es: ", calc.raiz_cuadrada(a))
-            except ValueError:
-                print("Error: Debe ingresar solo números.\n")
-
-        elif switcher == 6:
-            try:
-                a = int(input("Ingrese el número para calcular su factorial: \n"))
-                print("El resultado del factorial es: ", calc.fact(a))
-            except ValueError:
-                print("Error: Debe ingresar solo números enteros.\n")
-
-        elif switcher == 7:
-            try:
-                lado = float(input("Ingrese el lado del cuadrado: \n"))
-                print("El área del cuadrado es: ", area.area_cuadrado(lado))
-            except ValueError:
-                print("Error: Debe ingresar solo números.\n")
-
-        elif switcher == 8:
-            try:
-                base = float(input("Ingrese la base del rectángulo: \n"))
-                altura = float(input("Ingrese la altura del rectángulo: \n"))
-                print("El área del rectángulo es: ", area.area_rectangulo(base, altura))
-            except ValueError:
-                print("Error: Debe ingresar solo números.\n")
-
-        elif switcher == 9:
-            try:
-                base = float(input("Ingrese la base del triángulo: \n"))
-                altura = float(input("Ingrese la altura del triángulo: \n"))
-                print("El área del triángulo es: ", area.area_triangulo(base, altura))
-            except ValueError:
-                print("Error: Debe ingresar solo números.\n")
-
-        elif switcher == 10:
-            try:
-                radio = float(input("Ingrese el radio del círculo: \n"))
-                print("El área del círculo es: ", area.area_circulo(radio))
-            except ValueError:
-                print("Error: Debe ingresar solo números.\n")
-
-        else:
-            print("Opción no válida")
-
-# punto de entrada del programa
-if __name__ == "__main__":
-    mainCalc()`,
-
+        return self.val`,
       primos: `while True:
     num = int(input("Ingrese un número: "))
     for n in range(2, num):
@@ -313,16 +224,13 @@ if __name__ == "__main__":
         print("Es primo")
     if int(input("¿Desea probar otro? (1=Sí, otro=No): ")) != 1:
         break`,
-
       seno: `import math
-
 while True:
     grados = float(input("Ingrese grados: "))
     rad = grados/180*math.pi
     print("El seno es:", math.sin(rad))
     if int(input("¿Desea repetir? (1=Sí, otro=No): ")) != 1:
         break`,
-
       pares: `while True:
     num = int(input("Ingrese un número: "))
     if num % 2 == 0:
@@ -337,11 +245,10 @@ while True:
       const sel = document.getElementById("selector").value;
       const pre = document.getElementById("codigo");
       pre.textContent = codigos[sel];
-      hljs.highlightAll(); 
+      hljs.highlightAll();
     }
 
     mostrarCodigo();
   </script>
-
 </body>
 </html>

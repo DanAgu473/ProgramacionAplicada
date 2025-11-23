@@ -5,18 +5,18 @@ import matplotlib.pyplot as plt
 
 puerto = 'COM5'
 baudrate = 115200
-archivo = 'lecturas.csv'
+archivo = 'numeros.csv'
 
 # Conexión con el ESP32 via puerto serial
 ser = serial.Serial(puerto, baudrate, timeout=1)
 time.sleep(3)
 ser.reset_input_buffer()
 
-encabezado = "Tiempo(s),Voltaje(V)"
+encabezado = "Tiempo(s),Numero_Aleatorio"
 patron_csv = re.compile(r'^-?\d+(\.\d+)?,\s*\d+,\s*\d+(\.\d+)?$', re.IGNORECASE)
 
 tiempos = []
-Voltaje = []
+numeros = []
 
 plt.ion()
 fig, ax = plt.subplots()
@@ -43,15 +43,15 @@ with open(archivo, 'w', encoding='utf-8') as f:
 
                 partes = linea.split(',')
                 t = float(partes[0])
-                n = float(partes[2])
+                n = float(partes[1])
 
                 tiempos.append(t)
-                Voltaje.append(n)
+                numeros.append(n)
 
                 ax.clear()
-                ax.plot(tiempos, Voltaje)
+                ax.plot(tiempos, numeros)
                 ax.set_xlabel("Tiempo (s)")
-                ax.set_ylabel("Voltaje (V)")
+                ax.set_ylabel("Número")
                 ax.set_title("Lectura en tiempo real")
                 ax.grid(True)
                 plt.pause(0.01)
