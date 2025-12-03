@@ -15,11 +15,14 @@ max_puntos = 500
 tiempos = deque(maxlen=max_puntos)
 valores = deque(maxlen=max_puntos)
 
+#PyQtGraph suavizar
+pg.setConfigOptions(antialias=True)
+
 # PyQtGraph
 app = QtWidgets.QApplication([])
 win = pg.GraphicsLayoutWidget(show=True, title="Lectura Tiempo Real - ESP32")
 plot = win.addPlot(title="Curva de carga/descarga (V1 - V2)")
-curve = plot.plot(pen='y')
+curve = plot.plot(pen=pg.mkPen("y", width=2, antialias=True))
 
 plot.setLabel('left', "Voltaje (V)")
 plot.setLabel('bottom', "Muestras")
