@@ -11,7 +11,7 @@ baudrate = 115200
 # Crear archivo CSV y escribir encabezados
 archivo_csv = open("Capacitor.csv", "w", newline="")
 writer = csv.writer(archivo_csv)
-writer.writerow(["Tiempo (muestra)", "V1 - V2"])
+writer.writerow(["Tiempo (ms)", "V1 - V2"])
 
 # Puerto serial
 ser = serial.Serial(puerto, baudrate, timeout=0.1)
