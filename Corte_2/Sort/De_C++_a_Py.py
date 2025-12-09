@@ -1,4 +1,4 @@
-# ----------------------------- VALIDACIONES -----------------------------
+# FUNCIONES DE ENTRADA 
 
 def pedir_entero_positivo(mensaje):
     """Pide un entero positivo, sin permitir letras, símbolos o negativos."""
@@ -32,7 +32,7 @@ def pedir_lista_enteros(n):
     return arr
 
 
-# ----------------------------- BUBBLE SORT -----------------------------
+#  BUBBLE SORT 
 
 def bubble_sort(arr):
     n = len(arr)
@@ -42,8 +42,7 @@ def bubble_sort(arr):
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
 
 
-# ----------------------------- INSERTION SORT -----------------------------
-
+#  INSERTION SORT 
 def insertion_sort(arr):
     n = len(arr)
     for i in range(1, n):
@@ -57,7 +56,7 @@ def insertion_sort(arr):
         arr[j + 1] = key
 
 
-# ----------------------------- MERGE SORT -----------------------------
+#  MERGE SORT 
 
 def merge(arr, l, m, r):
     n1 = m - l + 1
@@ -97,7 +96,7 @@ def merge_sort(arr, l, r):
         merge(arr, l, m, r)
 
 
-# ----------------------------- QUICK SORT -----------------------------
+#  QUICK SORT 
 
 def swap(arr, i, j):
     arr[i], arr[j] = arr[j], arr[i]
@@ -123,7 +122,7 @@ def quick_sort(arr, low, high):
         quick_sort(arr, pi + 1, high)
 
 
-# ----------------------------- SELECTION SORT -----------------------------
+#  SELECTION SORT 
 
 def selection_sort(arr):
     n = len(arr)
@@ -135,7 +134,7 @@ def selection_sort(arr):
         arr[i], arr[min_index] = arr[min_index], arr[i]
 
 
-# ----------------------------- PROGRAMA PRINCIPAL -----------------------------
+#  PROGRAMA PRINCIPAL 
 
 def main():
     while True:
